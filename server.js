@@ -69,7 +69,7 @@ app.post('/upload', upload.single('file'), (req, res)=>{
       mimeType: mimeType,
       name
     });
-
+    
     res.sendStatus(200);
   });
 })
