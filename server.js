@@ -38,12 +38,19 @@ app.get("/receiver", (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/index_main.html");
+  res.sendFile(__dirname + "/public/index.html");
 });
+
+app.get('/sender', (req, res)=>{
+  res.sendFile(__dirname + "/public/sender.html")
+})
 
 app.post('/upload', upload.single('file'), (req, res)=>{
     const filePath = req.file.path;
     const mimeType = req.file.mimetype
+    let name  = req.file.originalname
+    let pos = name.lastIndexOf('.')
+    name = name.slice(0, pos)
   // Read the file data
   fs.readFile(filePath, (err, fileData) => {
     if (err) {
@@ -55,7 +62,8 @@ app.post('/upload', upload.single('file'), (req, res)=>{
     // Emit the file data to the receiver-side
     io.emit('file-transfer', {
       data: fileData,
-      mimeType: mimeType
+      mimeType: mimeType,
+      name
     });
 
     res.sendStatus(200);
@@ -100,10 +108,6 @@ io.on("connection", (socket) => {
   socket.on("file-upload", (data) => {
     console.log(data);
     socket.in(roomCode).emit("file-receive", data.file);
-  });
-
-  socket.on("send-file", (data) => {
-    io.emit("receive-file", data);
   });
 
   socket.on("disconnect", () => {

@@ -46,6 +46,9 @@ socket.on('not-allowed', ()=>{
 socket.on('file-transfer', (fileData) => {
     // Get the MIME type from the received file data
     const mimeType = fileData.mimeType;
+    if(!fileData.name){
+        console.log("NULL")
+    }
     console.log("I got " + mimeType)
     // // Create a Blob object from the file data and MIME type
     const blob = new Blob([fileData.data], { type: mimeType });
@@ -57,7 +60,8 @@ socket.on('file-transfer', (fileData) => {
     // // Create a temporary download link to download the file
     const downloadLink = document.createElement('a');
     downloadLink.href = URL.createObjectURL(blob);
-    downloadLink.download = `received-file.${extension}`; // Set desired filename with the appropriate extension
+    downloadLink.download = `${fileData.name}.${extension}`; // Set desired filename with the appropriate extension
+    console.log(downloadLink)
     downloadLink.click()
   });
   
