@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.6.1/socket.io.js" integrity="sha512-xbQU0+iHqhVt7VIXi6vBJKPh3IQBF5B84sSHdjKiSccyX/1ZI7Vnkt2/8y8uruj63/DVmCxfUNohPNruthTEQA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+    <!-- <div class='typebox'>
+        <input type="text" id="message" placeholder="Type a message">
+        <button onclick="send()">Send</button>
+    </div> -->
+
+    <div class="filebox">
+        <input type="file" multiple name="file" id='file-input'>
+        <button id="send-btn">Send File</button>
+    </div>
+    <p id="wrong-code"></p>
+    <script src="sender.js"></script>
+</body>
+
+</html>

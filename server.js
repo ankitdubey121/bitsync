@@ -38,7 +38,7 @@ app.get("/receiver", (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/index.html");
+  res.sendFile(__dirname + "/index_main.html");
 });
 
 app.post('/upload', upload.single('file'), (req, res)=>{

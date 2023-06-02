@@ -1,0 +1,294 @@
+body {
+    margin: 0px;
+}
+
+.navbar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+#menu-icon{
+    display:none;
+    position: relative;
+    top:5vh;
+    left:1vw;
+}
+.logo {
+   
+    margin-left: 3vw;
+    font-weight: bolder;
+    font-size: 2rem;
+   
+    font-family: "Segoe UI", Arial, sans-serif;
+    opacity: 0.9;
+}
+
+
+#dif{
+    color: rgba(13, 113, 221, 0.858);
+  
+}
+.navbar-menu {
+   
+    margin-right: 3vw;
+}
+
+.navbar-menu li {
+    display: inline-block;
+    margin-left: 15px;
+}
+
+.navbar-menu li a {
+    text-decoration: none;
+    opacity: 0.9;
+    color: #333;
+    padding:5px;
+    font-weight: bold;
+   
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+
+.navbar-menu li a:hover{
+    background-color: rgba(13, 113, 221, 0.858);
+    color:white;
+    /* padding:5px; */
+    border-radius: 5px;
+}
+
+
+
+
+
+
+
+/* //////////////////////////////////////////////////////////////////////////////////// */
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #f8f8f8;
+    overflow-x: hidden;
+    transition: 0.3s;
+    padding-top: 50px;
+    font-family: "Segoe UI", Arial, sans-serif;
+    border: 2px solid rgb(120, 107, 107);
+  }
+  
+  .sidenav a {
+    padding: 18px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 16px;
+    color: #333;
+    display: block;
+    transition: 0.3s;
+  }
+  
+  .sidenav a:hover {
+    background-color: rgba(13, 113, 221, 0.858);
+    color: white;
+    font-weight: bold;
+  }
+  
+  .sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+
+  /* //////////////////////////////////////////////////////////////////////////////////// */
+
+
+.main {
+    padding-top: 10vh;
+  
+    text-align: center;
+}
+
+.heading {
+
+    font-size: 32px;
+    font-weight: bold;
+    font-family: "Segoe UI", Arial, sans-serif;
+    opacity: 0.8;
+}
+
+.subheading {
+    margin-top: 15px;
+    font-size: 16px;
+    font-family: "Segoe UI", Arial, sans-serif;
+    opacity: 0.7;
+}
+
+
+.mainfeatures {
+    margin-top: 5vh;
+
+}
+
+.mainfeatures li {
+
+    margin-left: 15px;
+    padding: 12px;
+    display: inline-block;
+
+
+
+}
+
+.mainfeatures li a {
+    text-decoration: none;
+    color: #333;
+    padding: 12px;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    border-radius: 4px;
+    box-shadow: 2px 2px 2px rgb(110, 109, 109);
+}
+
+#blue {
+    background-color: rgba(13, 113, 221, 0.858);
+
+}
+
+
+#black {
+    background-color: rgb(15, 15, 19);
+}
+
+
+#main-img {
+    height: 50vh;
+    margin-top: 0;
+    width: 30vw;
+    filter:drop-shadow(10px 12px 12px rgb(6, 6, 6));
+}
+
+
+
+
+.footer {
+    background-color: #3a3a3a;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 0px;
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 12px;
+    padding-left: 12px;
+    padding-top: 0px;
+}
+
+.footer-menu li {
+    display: inline-block;
+    list-style: none;
+    margin-right: 15px;
+    opacity: 0.8;
+}
+
+.footer-menu li a {
+    text-decoration: none;
+    color: white;
+
+}
+
+.footer-menu {
+
+    margin-right: 3vw;
+}
+
+
+
+@media only screen and (max-width: 768px) {
+
+    body {
+        margin-top: 5px;
+    }
+
+    .navbar {
+        display: block;
+        text-align: center;
+    }
+
+    .navbar-menu {
+        display: none;
+    }
+
+    #menu-icon{
+        display:block;
+    }
+
+    .main {
+        padding-top: 40px;
+    }
+
+    .heading {
+        font-size: 35px;
+    }
+
+    .subheading {
+        margin-top: 30px;
+        font-size: 16px;
+        opacity: 0.9;
+    }
+
+    .mainfeatures {
+        margin-top: 5vh;
+
+    }
+
+    .mainfeatures li {
+        display: block;
+        margin-left: 0px;
+
+        margin-bottom: 2rem;
+
+    }
+
+    .mainfeatures li a {
+        padding: 1rem;
+
+    }
+
+
+    #main-img {
+        height: 50vh;
+        margin-top: 0;
+        width: auto;
+    }
+
+
+
+    .footer {
+        display: block;
+        text-align: center;
+    }
+
+
+
+    .footer-menu {
+
+        display: none;
+    }
+
+
+
+    .sidenav {
+        width: 0px;
+      }
+      
+      .sidenav .closebtn {
+        font-size: 20px;
+        margin-left: 0;
+      }
+}
