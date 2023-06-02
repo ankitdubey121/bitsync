@@ -1,7 +1,6 @@
 {
   "name": "pracsocket",
   "version": "1.0.0",
-  "description": "",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -17,5 +16,6 @@
     "nodemon": "^2.0.22",
     "socket.io": "^4.6.1",
     "uuid": "^9.0.0"
-  }
+  },
+  "description": ""
 }
