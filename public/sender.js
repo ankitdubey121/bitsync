@@ -1,4 +1,4 @@
-const socket = io('http://localhost:3000')
+const socket = io('https://bitsync.onrender.com')
 
 function generateUUID() {
 var code = '';
