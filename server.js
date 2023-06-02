@@ -47,7 +47,11 @@ app.get('/sender', (req, res)=>{
 
 app.post('/upload', upload.single('file'), (req, res)=>{
     const filePath = req.file.path;
-    const mimeType = req.file.mimetype
+    let mimeType = req.file.mimetype
+    if(mimeType.includes('document')){
+      mimeType = 'document/docx'
+    }
+    console.log(mimeType)
     let name  = req.file.originalname
     let pos = name.lastIndexOf('.')
     name = name.slice(0, pos)
