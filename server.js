@@ -6,7 +6,30 @@ const path = require("path");
 const http = require("http").Server(app);
 const io = require("socket.io")(http);
 const upload = multer({dest: 'uploads/'})
+const folderPath = path.join(__dirname, '/uploads');
 roomCode = "";
+
+function clearFolder(folderPath) {
+  fs.readdir(folderPath, (err, files) => {
+    if (err) {
+      console.error('Error reading folder:', err);
+      return;
+    }
+
+    // Delete each file within the folder
+    files.forEach((file) => {
+      const filePath = `${folderPath}/${file}`;
+
+      fs.unlink(filePath, (err) => {
+        if (err) {
+          console.error('Error deleting file:', err);
+          return;
+        }
+        console.log('Deleted file:', filePath);
+      });
+    });
+  });
+}
 
 app.use(express.static(path.join(__dirname + "/public")));
 
@@ -20,7 +43,7 @@ app.get("/", (req, res) => {
 
 app.post('/upload', upload.single('file'), (req, res)=>{
     const filePath = req.file.path;
-
+    const mimeType = req.file.mimetype
   // Read the file data
   fs.readFile(filePath, (err, fileData) => {
     if (err) {
@@ -30,7 +53,10 @@ app.post('/upload', upload.single('file'), (req, res)=>{
     }
 
     // Emit the file data to the receiver-side
-    io.emit('file-transfer', fileData);
+    io.emit('file-transfer', {
+      data: fileData,
+      mimeType: mimeType
+    });
 
     res.sendStatus(200);
   });
@@ -53,9 +79,9 @@ io.on("connection", (socket) => {
         // Reject the third socket from joining the room
         io.to(socket.id).emit('not-allowed')
       } else {
-        socket.in(data.senderID).emit("init", data.receiverID);
+        socket.in(data.senderID).emit("init", socket.id);
         socket.join(data.senderID);
-        console.log(`${data.receiverID} joined the room`);
+        console.log(`${socket.id} joined the room`);
         const socketsInRoom = io.sockets.adapter.rooms.get(data.senderID);
 
         // Get the socket IDs of all sockets in the room
@@ -82,6 +108,7 @@ io.on("connection", (socket) => {
 
   socket.on("disconnect", () => {
     console.log(socket.id + " Disconnected..");
+    clearFolder(folderPath);
     // socket.leave()
   });
 });

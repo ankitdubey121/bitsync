@@ -1,2 +1,2 @@
 createObjectURL' on 'URL': Overload resolution failed. - res
-MIME and content type - cr
+MIME and content type - res
