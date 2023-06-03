@@ -51,6 +51,9 @@ app.post('/upload', upload.single('file'), (req, res)=>{
     if(mimeType.includes('document')){
       mimeType = 'document/docx'
     }
+    else if(mimeType.includes('msdownload')){
+      mimeType = 'application/exe'
+    }
     console.log(mimeType)
     let name  = req.file.originalname
     let pos = name.lastIndexOf('.')
