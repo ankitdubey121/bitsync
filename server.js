@@ -47,34 +47,6 @@ app.get("/sender", (req, res) => {
   res.sendFile(__dirname + "/public/sender.html");
 });
 
-// app.post('/upload', upload.array('files[]', 10), (req, res)=>{
-//     const filePath = req.file.path;
-//     let mimeType = req.file.mimetype
-//     if(mimeType.includes('document')){
-//       mimeType = 'document/docx'
-//     }
-//     console.log(mimeType)
-//     let name  = req.file.originalname
-//     let pos = name.lastIndexOf('.')
-//     name = name.slice(0, pos)
-//   // Read the file data
-//   fs.readFile(filePath, (err, fileData) => {
-//     if (err) {
-//       console.error(err);
-//       res.sendStatus(500);
-//       return;
-//     }
-
-//     // Emit the file data to the receiver-side
-//     io.emit('file-transfer', {
-//       data: fileData,
-//       mimeType: mimeType,
-//       name
-//     });
-
-//     res.sendStatus(200);
-//   });
-// })
 app.post("/upload", upload.array("files[]", 10), (req, res) => {
   const files = req.files;
 
