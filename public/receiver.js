@@ -1,54 +1,50 @@
-const socket = io('http://localhost:3000')
+const socket = io("http://localhost:3000");
 
 function generateUUID() {
-    var code = '';
-    for (var i = 0; i < 3; i++) {
-        var segment = Math.floor(Math.random() * 256).toString(16);
-        if (segment.length < 2) {
-        segment = '0' + segment; // Pad with leading zero if necessary
-        }
-        code += segment + '-';
+  var code = "";
+  for (var i = 0; i < 3; i++) {
+    var segment = Math.floor(Math.random() * 256).toString(16);
+    if (segment.length < 2) {
+      segment = "0" + segment; // Pad with leading zero if necessary
     }
-    return code.slice(0, -1); // Remove the trailing dash
+    code += segment + "-";
+  }
+  return code.slice(0, -1); // Remove the trailing dash
 }
-receiverID = ''
+receiverID = "";
 
+const joinBtn = document.getElementById("joinBtn");
 
-
-const joinBtn = document.getElementById('joinBtn')
-
-
-joinBtn.addEventListener('click', ()=>{
-    let senderID = document.getElementById('roomCode').value
-    socket.on('connect', ()=>{
-        receiverID = socket.id;
-    })
-    socket.emit('join-room', {senderID, receiverID});
-})
-
-socket.on('wrong-code', ()=>{
-    alert('Wrong code')   
-})
-
-socket.on('not-allowed', ()=>{
-    alert("Maximum limit reached. Can't join")
-})
- 
-
-socket.on('file-transfer', (fileData) => {
-    // Get the MIME type from the received file data
-    const mimeType = fileData.mimeType;
-    console.log(mimeType);
-    // // Create a Blob object from the file data and MIME type
-    const blob = new Blob([fileData.data], { type: mimeType });
-  
-    // // Get the file extension based on the MIME type
-    const extension = mimeType.split('/')[1];
-
-    // // Create a temporary download link to download the file
-    const downloadLink = document.createElement('a');
-    downloadLink.href = URL.createObjectURL(blob);
-    downloadLink.download = `${fileData.name}.${extension}`; // Set desired filename with the appropriate extension
-    downloadLink.click()
+joinBtn.addEventListener("click", () => {
+  let senderID = document.getElementById("roomCode").value;
+  socket.on("connect", () => {
+    receiverID = socket.id;
   });
-  
+  socket.emit("join-room", { senderID, receiverID });
+});
+
+socket.on("wrong-code", () => {
+  alert("Wrong code");
+});
+
+socket.on("not-allowed", () => {
+  alert("Maximum limit reached. Can't join");
+});
+
+socket.on("file-transfer", (fileData) => {
+  const mimeType = fileData.mimeType;
+  const blob = new Blob([fileData.data], { type: mimeType });
+  const extension = mimeType.split("/")[1];
+  const filesContainer = document.getElementById("files-container");
+  const downloadLink = document.createElement("a");
+  downloadLink.href = URL.createObjectURL(blob);
+  downloadLink.download = `${fileData.name}.${extension}`;
+  downloadLink.innerText = `${fileData.name}`;
+
+  downloadLink.addEventListener("click", () => {
+    URL.revokeObjectURL(downloadLink.href);
+  });
+
+  filesContainer.appendChild(downloadLink);
+  filesContainer.appendChild(document.createElement('br'))
+});
