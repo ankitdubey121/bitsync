@@ -31,36 +31,6 @@ sendbtn.addEventListener("click", (event) => {
   const numFiles = fileInput.files.length;
   console.log(fileInput.files);
   console.log("Number of files selected:", numFiles);
-  // if (numFiles > 1) {
-  //   console.log(event.target);
-  //   for (let i = 0; i < numFiles; i++) {
-  //     const file = fileInput.files[i];
-  //     const fileName = file.name;
-  //     zip.file(fileName, file);
-  //   }
-
-  //     zip.generateAsync({ type: "blob" }).then((zipData) => {
-  //       // Send the zip file to the receiver
-  //       // You can use AJAX or WebSocket to send the zipData to the receiver
-  //       // For example, using Fetch API for AJAX:
-  //       console.log(zipData)
-  //       fetch("/upload", {
-  //         method: "POST",
-  //         body: zipData,
-  //       })
-  //         .then((response) => {
-  //           if (response.ok) {
-  //             console.log("Zip file uploaded successfully");
-  //           } else {
-  //             console.error("Zip file upload failed");
-  //           }
-  //         })
-  //         .catch((error) => {
-  //           console.error("An error occurred during zip file upload:", error);
-  //         });
-  //     });
-  // } else {
-  // Add each file to the form data
   const formData = new FormData();
   for (let i = 0; i < numFiles; i++) {
     const file = fileInput.files[i];
