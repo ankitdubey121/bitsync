@@ -1,5 +1,5 @@
-// const socket = io("http://localhost:3000");
-const socket = io("https://bitsync.onrender.com");
+const socket = io("http://localhost:3000");
+// const socket = io("https://bitsync.onrender.com");
 
 receiverID = "";
 
@@ -57,7 +57,9 @@ socket.on("file-transfer", (fileData) => {
   downloadLink.innerText = `Download`;
 
   downloadLink.addEventListener("click", () => {
-    URL.revokeObjectURL(downloadLink.href);
+    setTimeout(()=>{
+      URL.revokeObjectURL(downloadLink.href);
+    },100);
   });
 
   // filesContainer.style.display = block;
