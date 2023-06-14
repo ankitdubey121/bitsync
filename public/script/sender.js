@@ -1,4 +1,6 @@
-const socket = io("http://localhost:3000");
+// const socket = io("http://localhost:3000");
+const socket = io("https://bitsync.onrender.com");
+
 const zip = new JSZip();
 function generateUUID() {
   var code = "";
