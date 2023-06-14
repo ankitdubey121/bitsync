@@ -1,6 +1,7 @@
 const express = require("express");
 const multer = require("multer");
 const app = express();
+const ejs = require('ejs');
 const fs = require("fs");
 const path = require("path");
 const http = require("http").Server(app);
@@ -33,28 +34,38 @@ function clearFolder(folderPath) {
   });
 }
 
-app.use(express.static(path.join(__dirname + "/public")));
+// app.use(express.static(path.join(__dirname + "/public")));
+app.use(express.static('public'));
+app.set('view engine', 'ejs');
+
 
 app.get("/receiver", (req, res) => {
-  res.sendFile(__dirname + "/public/receiver.html");
+  res.render("receiver");
+  // res.sendFile(__dirname + "/public/receiver.html");
 });
 
 app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/public/index.html");
+  res.render("index");
+  // res.sendFile(__dirname + "/public/index.html");
 });
 
 app.get("/sender", (req, res) => {
-  res.sendFile(__dirname + "/public/sender.html");
+  res.render("sender");
+  // res.sendFile(__dirname + "/public/sender.html");
+});
+
+app.get('/index',(req,res)=>{
+  res.render("index");
 });
 
 app.post("/upload", upload.array("files[]", 10), (req, res) => {
   const files = req.files;
-
+  const fileCount = files.length;
   // Process each uploaded file
   files.forEach((file) => {
     const filePath = file.path;
     let mimeType = file.mimetype;
-
+    
     if (mimeType.includes("document")) {
       mimeType = "document/docx";
     }
@@ -78,6 +89,8 @@ app.post("/upload", upload.array("files[]", 10), (req, res) => {
         data: fileData,
         mimeType: mimeType,
         name: name,
+        fileCount: fileCount,
+        
       });
     });
   });
@@ -102,7 +115,9 @@ io.on("connection", (socket) => {
         // Reject the third socket from joining the room
         io.to(socket.id).emit("not-allowed");
       } else {
-        socket.in(data.senderID).emit("init", socket.id);
+        // socket.in(data.senderID).emit("init", socket.id);
+        io.to(socket.id).emit('init')
+        io.to(data.senderID).emit('init');
         socket.join(data.senderID);
         console.log(`${socket.id} joined the room`);
         const socketsInRoom = io.sockets.adapter.rooms.get(data.senderID);

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sender</title>
+  <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.6.1/socket.io.js"
+      integrity="sha512-xbQU0+iHqhVt7VIXi6vBJKPh3IQBF5B84sSHdjKiSccyX/1ZI7Vnkt2/8y8uruj63/DVmCxfUNohPNruthTEQA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/jszip@3.7.1/dist/jszip.min.js"></script>
+</head>
+
+<body>
+  <%- include('head') %>
+
+    <div class="sender-main">
+      <div class="sender-heading">You are a Sender</div>
+      <div class="sender-subheading">Share your files effortlessly and securely with BitSync.</div>
+      <div class="sender-input-container">
+        <div id='room-info' class="room-info">
+          <div id='roomcode-head' class="roomcode-head">Room Code</div>
+          <!-- <div id='copy-code' class="code">ghyt-yui-op</div> -->
+          <!-- <textarea class="code" id='copy-code' rows="1" disabled>ghyt-yui-op</textarea> -->
+        </div>
+        <img src="/img/copy.png" id='copyimg' alt="copy" onclick="copyText()">
+      </div>
+
+
+
+      <div class="sender-file-input">
+        <input id="file-input" class="file-input" multiple type="file">
+
+        <label for="file-input" class="file-input-label">
+          <img src="/img/file.svg" alt="File Icon" />
+          <span><b>Choose a File</b> or Drag it !!</span>
+        </label>
+      </div>
+      <button id="send-btn">Send ▶</button>
+      <p id='max-info'>Max Files : 10 | Max Size : 2GB</p>
+    </div>
+
+
+    <div id='message-box' class="message-box">
+      <!-- <p class="message">Update.exe File Updated Successfully</p> -->
+    </div>
+
+
+
+
+    <div class="area">
+      <ul class="circles">
+        <%for(let i=0; i < 10; i++){%>
+        <li></li>
+        <%}%>
+      </ul>
+    </div>
+
+
+</body>
+
+<script src="/script/sender.js"></script>
+</html>
