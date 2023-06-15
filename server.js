@@ -58,6 +58,12 @@ app.get('/index',(req,res)=>{
   res.render("index");
 });
 
+
+app.get("/about", (req, res) => {
+  res.render("about");
+  // res.sendFile(__dirname + "/public/receiver.html");
+});
+
 app.post("/upload", upload.array("files[]", 10), (req, res) => {
   const files = req.files;
   const fileCount = files.length;
