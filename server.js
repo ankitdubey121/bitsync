@@ -64,6 +64,11 @@ app.get("/about", (req, res) => {
   // res.sendFile(__dirname + "/public/receiver.html");
 });
 
+app.get("/features", (req, res) => {
+  res.render("features");
+  // res.sendFile(__dirname + "/public/receiver.html");
+});
+
 app.post("/upload", upload.array("files[]", 10), (req, res) => {
   const files = req.files;
   const fileCount = files.length;

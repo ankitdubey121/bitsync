@@ -17,6 +17,19 @@ body {
 
 }
 
+#ref-logo{
+    text-decoration: none;
+    color:black;
+    text-decoration-style: none;
+}
+
+#ref-side-logo{
+    text-decoration: none;
+    color:black;
+    text-decoration-style: none;
+    padding-left: 1.5rem;
+}
+
 #menu-icon {
     display: none;
     position: relative;
@@ -76,7 +89,7 @@ body {
     height: 100%;
     width: 0;
     position: fixed;
-    z-index: 5;
+    z-index: 7;
     top: 0;
     left: 0;
     background-color: #f8f8f8;
@@ -113,7 +126,8 @@ body {
 
 .BSidelogo {
 
-    margin-left: 1.5rem;
+    margin:0rem;
+    padding-left: 0rem;
     margin-bottom:1rem;
     font-weight: bolder;
     font-size: 2rem;
@@ -124,7 +138,7 @@ body {
 
 
 
-/* SIDENA BAR END////////////////////////////////////////////////////////////////////// */
+/* SIDENAv BAR END////////////////////////////////////////////////////////////////////// */
 
 
 
@@ -406,6 +420,10 @@ textarea {
     border-radius: 5px;
 }
 
+#mobile-span{
+    display:none;
+}
+
 
 /* SENDER HTML FILE CSS CODE end  ///////////////////////////////////////////////////////////*/
 
@@ -510,9 +528,9 @@ textarea {
     position: absolute;
     top: 10vh;
     left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
+   width:90%;
+   height:90%;
+    /* overflow-x: hidden; */
 }
 
 .circles li {
@@ -636,13 +654,26 @@ textarea {
 /* //////////////////////////////////////////////////////////////////////////////////// */
 
 
-/* ABOUT  /////////////////////////////////////////////////////////////////////////////////////*/
+/* Features  /////////////////////////////////////////////////////////////////////////////////////*/
+
+.features-heading{
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 2rem;
+    opacity: 0.5;
+    display: grid;
+    place-items: center;
+}
+
+.features-heading div{
+    border-bottom: 2px solid rgb(32, 32, 32);
+    padding:1rem 0.5rem 0rem 0.5rem;
+}
 .container {
-    margin-top: 10vh;
+    margin-top: 1rem;
     display: flex;
     flex-direction: row;
-    padding: 4vh 5vw 0vh 5vw;
-    margin-bottom: 10vh;
+    padding: 0vh 5vw 0vh 5vw;
+    margin-bottom: 2rem;
     justify-content: center;
 
 }
@@ -650,11 +681,8 @@ textarea {
 
 .left-content {
     flex: 0 0 50%;
-    padding: 0px 20px 0px 20px;
+    padding: 5rem 1rem 0rem 1rem;
     box-sizing: border-box;
-    border-radius: 50px;
-    border: 1px 0px 0px 1px solid #0d0d0e;
-    box-shadow: 5px 5px 5px rgb(60, 59, 59);
 }
 
 .left-content p {
@@ -673,7 +701,6 @@ textarea {
 
 .right-content {
     flex: 0 0 50%;
-    padding: 20px;
     box-sizing: border-box;
     display: flex;
     align-items: center;
@@ -681,15 +708,119 @@ textarea {
 }
 
 .right-content img {
-    max-width: 20vw;
-    height: auto;
-    filter: drop-shadow(10px 12px 12px rgb(6, 6, 6));
+    width: 25rem;
+    height: 25rem;
 }
 
-/*  about code end/////////////////////////////////////////////////////////// */
+
+/*  feature code end/////////////////////////////////////////////////////////// */
+
+/* About Code Start ///////////////////////////////////////////////////////////////////////////// */
+.about-main-heading{
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 2rem;
+    opacity: 0.5;
+    display: grid;
+    place-items: center;
+}
+
+.about-main-heading div{
+    border-bottom: 2px solid rgb(32, 32, 32);
+    padding:1rem 0.5rem 0rem 0.5rem;
+}
 
 
 
+.about-container {
+    display: flex;
+    flex-direction: row;
+    margin:2rem 2rem 3rem 2rem;
+    padding:1rem;
+}
+
+.about-left-content {
+    width:45%;
+    padding-top:0rem;
+}
+
+.about-right-content {
+    width:55%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.about-heading {
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 2.5rem;
+    opacity: 0.8;
+    font-weight: 500;
+}
+
+.about-left-content p {
+    font-size: 1.2rem;
+    opacity: 0.7;
+    font-family: "Segoe UI", Arial, sans-serif;
+    line-height: 0.7cm;
+}
+
+#about-device-pic{
+    width: 90%;
+    padding-left: 10%;
+    filter:drop-shadow(10px 12px 12px rgb(8, 5, 5)) ;
+    /* box-shadow: 5px 6px 6px rgb(105, 102, 102); */
+    
+    /* height: 100%; */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.team{
+    display:grid;
+    place-items: center;
+    margin:1rem 0rem 10rem 0rem;
+}
+
+.meet-our-team{
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 2.5rem;
+    padding:1rem 2rem 1rem 2rem;
+    opacity: 0.8;
+    border-radius: 50px;
+    border:2px solid grey;
+}
+
+.team-members{
+    display: flex;
+    flex-direction: row;
+    gap:6.5rem;
+    margin:2rem 1.2rem 2rem 1.2rem;
+}
+
+.team-members img{
+    width:10rem;
+}
+
+.name{
+    font-family: "Segoe UI", Arial, sans-serif;
+    text-align: center;
+    font-size: 2rem;
+    padding:1rem 2rem 1rem 2rem;
+    opacity: 0.8;
+}
 
 
 
@@ -698,11 +829,15 @@ textarea {
 @media only screen and (max-width: 600px) {
     .BSlogo {
         font-size: 2rem;
+        margin-left: 0rem;
     }
 
+    
+
     .BSnavbar {
-        display: block;
+        display:block;
         text-align: center;
+        z-index: 5;
     }
 
     .BSnavbar-menu {
@@ -713,10 +848,12 @@ textarea {
         display: block;
         top: 2.2rem;
         left: 1rem;
+        z-index: 6;
     }
 
     .sidenav {
         width: 0px;
+
     }
 
     .sidenav .closebtn {
@@ -852,15 +989,22 @@ textarea {
     }
 
     .file-input-label span {
-        font-size: 1.2rem;
-        padding: 2vh 3vw 2vh 2vw;
+        font-size: 1.3rem;
+        padding: 2.5vh 3vw 2.5vh 3vw;
         font-weight: 300;
     }
 
     .file-input-label img {
         width: 64px;
         height: 64px;
-        padding-top: 1vh;
+        padding-top: 0.5vh;
+    }
+
+    #pc-span{
+        display:none;
+    }
+    #mobile-span{
+        display:block;
     }
 
 
@@ -873,8 +1017,6 @@ textarea {
     /* RECEIVER START ///////////////////////////////////////////////////////////// */
 
     .receiver-main {
-        /* padding: 5vh 1vw 5vh 1vw;
-        margin: 5vh 0vw 2vh 0vw; */
         margin: 1rem 0rem 1rem 0rem;
         padding: 2rem;
         box-shadow: none;
@@ -897,8 +1039,6 @@ textarea {
         padding: 0% 0% 0% 4%;
         font-size: 1.3rem;
         margin-top:1.3rem;
-        /* height: 50%; */
-        /* box-sizing: border-box; */
     }
 
     #joinBtn {
@@ -915,7 +1055,13 @@ textarea {
 
 
 
-    /* ABOUT START ///////////////////////////////////////////////// */
+    /* Feature START ///////////////////////////////////////////////// */
+    .features-heading{
+        margin-top:1rem;
+        margin-bottom:2rem;
+        font-size: 1.8rem;
+        opacity: 0.8;
+    }
 
     .container .right-content img {
         display: none;
@@ -925,17 +1071,15 @@ textarea {
     .container {
         display: block;
         /* flex-direction: column; */
-        margin-top: 1vh;
-        margin-bottom: 0vh;
-
-
+        margin-top: 1rem;
+        margin-bottom: 1rem;
     }
+
+
 
     .left-content {
         flex: 100%;
-        padding: 1vh 5vw 2vh 5vw;
-
-
+        padding: 0rem 0rem 0rem 0rem;
     }
 
     .right-content {
@@ -944,7 +1088,6 @@ textarea {
 
 
     .heading {
-
         font-size: 30px;
         opacity: 1;
         text-align: center;
@@ -952,11 +1095,93 @@ textarea {
 
     .left-content p {
         text-align: justify;
+        padding:0rem 1rem 0rem 1rem;
 
     }
-/*ABOUT END  ////////////////////////////////////////////////////////////////////////////////////// */
+
+  
+/*feature END  ////////////////////////////////////////////////////////////////////////////////////// */
+
+/* About code start ///////////////////////////////////////////////////////////////////////// */
+
+.about-main-heading{
+    font-size: 1.8rem;
+    opacity: 0.8;
+    margin-top:2rem;
+}
+
+.about-container {
+    display: block;
+    text-align: center;
+    margin:2rem 0rem 2rem 0rem;
+    padding:0rem;
+    
+}
+
+.about-left-content {
+    width:100%;
+}
+
+.about-heading {
+    padding:0rem 1.7rem 0rem 1.7rem;
+    font-size: 2rem;
+    opacity: 0.8; 
+}
+
+#about-p{
+    text-align: center;
+    padding:0rem 2rem 0rem 2rem;
+}
+
+.about-right-content {
+    width:0%;
+    display: none;
+    
+}
+
+.about-container .about-right-content img {
+    display: none;
+}
+
+.team{
+    display:block;
+    text-align: center;
+}
+
+.meet-our-team{
+    font-size: 1.5rem;
+    padding: 2px;
+    border:none;
+    opacity:0.8;
+    font-weight: 500;
+}
+
+.team-members{
+    display: flex;
+    flex-direction: column;
+    gap:2rem;
+    margin:1rem 1rem 2rem 1rem;
+}
+
+.team-members img{
+    width:8rem;
+    filter:drop-shadow(5px 6px 6px grey) ;
+}
+.member{
+   background-color: #e6e2e2d6;
+   padding:1rem 1rem 1rem 1rem;
+   margin:1rem 2rem 1rem 2rem;
+}
+
+.name{
+
+    font-size: 1.5rem;
+    padding:1rem 2rem 0rem 2rem;
+    opacity: 0.8;
+}
 
 
+/* about code end//////////////////////////////////////////////////////////////////////////// */
 
 }
 
