@@ -1,5 +1,5 @@
-// const socket = io("http://localhost:3000");
-const socket = io("https://bitsync.onrender.com");
+const socket = io("http://localhost:3000");
+// const socket = io("https://bitsync.onrender.com");
 
 receiverID = "";
 
@@ -35,11 +35,14 @@ socket.on('init',()=>{
 
 
 socket.on("wrong-code", () => {
-  alert("Wrong code");
+  // alert("Wrong code");
+  showAlert('error',"Wrong code");
 });
 
 socket.on("not-allowed", () => {
-  alert("Maximum limit reached. Can't join");
+  // alert("Maximum limit reached. Can't join");
+  showAlert('warning',"Maximum limit reached. Can't join");
+  
 });
 
 socket.on("file-transfer", (fileData) => {
@@ -87,7 +90,7 @@ socket.on("file-transfer", (fileData) => {
     tr.appendChild(tdAction);
 
     const load = document.getElementById('load-section');
-    load.style.display = 'none';
+    load.style.opacity = '0';
   // }
 
   // filesContainer.appendChild(downloadLink);

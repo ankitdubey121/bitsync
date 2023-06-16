@@ -1,5 +1,5 @@
-// const socket = io("http://localhost:3000");
-const socket = io("https://bitsync.onrender.com");
+const socket = io("http://localhost:3000");
+// const socket = io("https://bitsync.onrender.com");
 
 const zip = new JSZip();
 function generateUUID() {
@@ -24,30 +24,9 @@ socket.on("init", (data) => {
   console.log("Inside init event and displaying receiver id");
   receiverID = data;
   console.log(receiverID);
-  alert('Receiver Joined');
+  // alert('Receiver Joined');
+  showAlert('success',"Receiver Joined");
 });
-
-const messageInfo = {
-  success: 'File Uploaded Successfully',
-  err: 'File Upload Failed',
-  errExp: 'An error occurred during file upload'
-};
-
-const createMsgBox = (num,msg,color) =>{
-
-  const messageBox = document.getElementById('message-box');
-  messageBox.style.display='grid';
-  const message = document.createElement('p');
-  message.classList.add('message');
-  message.style.backgroundColor = color;
-  message.innerText = `${num} ${msg}`;
-  messageBox.appendChild(message);
-  console.log('created');
-  // setTimeout(messageBox.style.display='none',3000);
-  setTimeout(() => {
-    messageBox.style.display='none';
-  }, 3000);
-}
 
 const fileInput = document.getElementById("file-input");
 const sendbtn = document.getElementById("send-btn");
@@ -85,23 +64,24 @@ sendbtn.addEventListener("click", (event) => {
         .then((response) => {
           if (response.ok) {
             console.log("File uploaded successfully " + sizeArray);
-            createMsgBox(numFiles,'File(s) Sent','green');
-            // setTimeout(createMsgBox(numFiles,'File(s) Sent','green'),1000);
+            showAlert('success',numFiles+' File(s) Sent',);
+
           } else {
-            createMsgBox(file.name,messageInfo.err, 'red');
+            showAlert('error','Sending Unsuccessful');
           }
         })
         .catch((error) => {
-          // createMsgBox('',messageInfo.errExp +': '+error, 'red');
-          console.log(messageInfo.errExp+error);
+          showAlert('error','Error: '+error);
         });
        }
   else{
-    alert('File Size Exceeded!');
+    // alert('File Size Exceeded!');
+    showAlert('warning','File Size Exceeded!');
   }
   }
   else{
-    alert('Maximum number of Files exceeded!');
+    // alert('Maximum number of Files exceeded!');
+    showAlert('warning','Maximum number of Files exceeded!');
   }
 });
 
@@ -122,9 +102,11 @@ function copyText() {
   navigator.clipboard
     .writeText(copyCode)
     .then(() => {
-      alert("Copied: " + copyCode);
+      // alert("Copied: " + copyCode);
+      showAlert('success',"Copied: " + copyCode);
     })
     .catch((error) => {
-        console.error("Unable to copy text to clipboard:", error);
+        // console.error("Unable to copy text to clipboard:", error);
+        showAlert('error',"Unable to copy text to clipboard:", error);
     });
 }

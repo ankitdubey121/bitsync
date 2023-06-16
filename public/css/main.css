@@ -414,14 +414,86 @@ textarea {
     place-items: center;
 }
 
-.message {
-    margin-top: 2vh;
-    /* background-color: green; */
-    color: white;
-    font-family: "Segoe UI", Arial, sans-serif;
-    font-size: 15px;
-    padding: 1rem;
-    border-radius: 5px;
+.alert {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 2;
+
+    margin: 0 auto;
+    width: 15%;
+    padding: 15px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-weight: bold;
+    opacity: 0;
+    transform: translateY(-100%);
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  }
+  
+  @media (max-width: 850px) {
+    .alert {
+        top: auto;
+        bottom: 50px;
+        left: 10px;
+        right: 10px;
+        width: 60%;
+        transform: none;
+      }
+  } 
+
+  @media (max-width: 600px) {
+    .alert {
+      top: auto;
+      bottom: 30px;
+      left: 10px;
+      right: 10px;
+      width: 60%;
+      transform: none;
+    }
+  }
+
+  .alert.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+
+  /* Icon styles */
+  .alert .icon {
+    margin-right: 10px;
+    flex-shrink: 0;
+  }
+
+  /* Close button styles */
+  .alert .close-button {
+    margin-left: auto;
+    cursor: pointer;
+  }
+
+  /* Success alert */
+  .alert.alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+  }
+
+  /* Error alert */
+  .alert.alert-error {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+  }
+
+  /* Warning alert */
+  .alert.alert-warning {
+    color: #856404;
+    background-color: #fff3cd;
+    border-color: #ffeeba;
 }
 
 #mobile-span{
@@ -505,7 +577,9 @@ textarea {
 
 .load {
     display: none;
-    justify-content: baseline;
+    justify-content: center;
+    text-align: center;
+    /* opacity: 0; */
 }
 
 .load p {
