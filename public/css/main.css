@@ -210,7 +210,11 @@ body {
     object-fit: cover;
 }
 
-
+/* display: block;
+        text-align: center;
+        height: 3vh;
+        padding-top: 1vh;
+        position: relative; */
 
 .footer {
     background-color: #3a3a3a;
@@ -222,7 +226,7 @@ body {
     font-size: 12px;
     padding-left: 12px;
     padding-top: 0px;
-    position: sticky;
+    position: relative;
     bottom: 0;
 }
 
@@ -672,7 +676,7 @@ textarea {
     margin-top: 1rem;
     display: flex;
     flex-direction: row;
-    padding: 0vh 5vw 0vh 5vw;
+    padding: 0vh 6vw 0vh 6vw;
     margin-bottom: 2rem;
     justify-content: center;
 
@@ -683,6 +687,7 @@ textarea {
     flex: 0 0 50%;
     padding: 5rem 1rem 0rem 1rem;
     box-sizing: border-box;
+    justify-content: center;
 }
 
 .left-content p {
@@ -690,12 +695,15 @@ textarea {
     opacity: 0.7;
     font-family: "Segoe UI", Arial, sans-serif;
     line-height: 0.7cm;
+    /* justify-content: center; */
+    /* text-align: center; */
 }
 
 .heading {
     font-family: "Segoe UI", Arial, sans-serif;
     font-size: 40px;
     opacity: 0.8;
+    /* text-align: center; */
 }
 
 
@@ -710,6 +718,12 @@ textarea {
 .right-content img {
     width: 25rem;
     height: 25rem;
+}
+
+#img1{
+    /* filter: saturate(7); */
+    /* filter: contrast(50%); */
+    filter: drop-shadow(10px 12px 12px rgb(6, 6, 6));
 }
 
 
