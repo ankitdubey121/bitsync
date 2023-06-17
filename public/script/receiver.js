@@ -1,9 +1,24 @@
-// const socket = io("http://localhost:3000");
-const socket = io("https://bitsync.onrender.com");
+const socket = io("http://localhost:3000");
+// const socket = io("https://bitsync.onrender.com");
 
 receiverID = "";
 
 const joinBtn = document.getElementById("joinBtn");
+const codeDiv = document.getElementById('roomCode');
+
+codeDiv.addEventListener('keyup', (e)=>{
+  let userInput = e.target.value
+  if(userInput.length == 2 || userInput.length == 5){
+    userInput += "-"
+  }
+  if(userInput.length > 8){
+    newValue = userInput.slice(0, 8)
+    codeDiv.value = newValue
+  }
+  else{
+    codeDiv.value = userInput
+  }
+})
 
 joinBtn.addEventListener("click", () => {
   let senderID = document.getElementById("roomCode").value;
@@ -15,10 +30,8 @@ joinBtn.addEventListener("click", () => {
 
 
 socket.on('init',()=>{
-  // console.log('init running');
+  showAlert('success', "Joined room")
   const receiverMain = document.getElementById('receiver-main');
-  const codeDiv = document.getElementById('roomCode');
-
   const displayCodeDiv = document.createElement('input');
   displayCodeDiv.disabled = true;
   displayCodeDiv.value = 'Joined: '+codeDiv.value;
@@ -96,3 +109,12 @@ socket.on("file-transfer", (fileData) => {
   // filesContainer.appendChild(downloadLink);
   // filesContainer.appendChild(document.createElement('br'))
 });
+
+
+// Room left
+
+socket.on('left', (data)=>{
+  if(socket.id != data){
+    showAlert('warning', "Sender left")
+  }
+})

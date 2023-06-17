@@ -152,9 +152,8 @@ io.on("connection", (socket) => {
   });
 
   socket.on("disconnect", () => {
-    console.log(socket.id + " Disconnected..");
+    io.to(roomCode).emit('left', socket.id);
     clearFolder(folderPath);
-    // socket.leave()
   });
 });
 

@@ -4,7 +4,7 @@ function sidenav(){
     document.getElementById("mySidenav").style.width = "250px";
 }
 
-document.querySelector(".closebtn").addEventListener("click", function () {
+document.getElementById("close-btn").addEventListener("click", function () {
   document.getElementById("mySidenav").style.width = "0";
 });
 

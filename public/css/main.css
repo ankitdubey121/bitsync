@@ -13,8 +13,9 @@ body {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
-
+    justify-content: space-around;
+    gap:10vw;
+    margin-top: 2vh;
 }
 
 #ref-logo{
@@ -144,12 +145,14 @@ body {
 
 /* index  page  start/////////////////////////////////////////////////////////////////////// */
 .main {
-    margin-top: 4rem;
+    /* margin-top: 4rem; */
     margin-left: 7rem;
     margin-right: 7rem;
     text-align: center;
     min-height: 90vh;
-
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .heading {
@@ -203,10 +206,12 @@ body {
 }
 
 .main-img img {
-    margin-top: 1rem;
-    height: 16rem;
-    width: 25rem;
-    filter: drop-shadow(10px 12px 12px rgb(6, 6, 6));
+    margin-top: 10vh;
+    height: 20rem;
+    width: 32rem;
+    /* /* filter: drop-shadow(5px 2px 3px rgb(6, 6, 6));  */
+    /* filter: drop-shadow(5px 5px 10px #666); */
+    /* filter: drop-shadow(0px 4px 12px rgba(0, 0, 0, 0.1) ) ; */
     object-fit: cover;
 }
 
@@ -223,7 +228,7 @@ body {
     justify-content: space-between;
     align-items: center;
     font-family: "Segoe UI", Arial, sans-serif;
-    font-size: 12px;
+    font-size: 1rem;
     padding-left: 12px;
     padding-top: 0px;
     position: relative;
@@ -303,6 +308,7 @@ body {
 .room-info {
     display: flex;
     flex-direction: column;
+    justify-content: center;
 }
 
 .roomcode-head {
@@ -368,7 +374,7 @@ textarea {
     justify-content: center;
     gap: 2rem;
     padding: 1rem;
-
+    justify-content: space-between;
     border: 2px solid white;
     border-style: dashed;
 }
@@ -420,7 +426,7 @@ textarea {
     z-index: 2;
 
     margin: 0 auto;
-    width: 15%;
+    width: 20%;
     padding: 15px;
     border: 1px solid transparent;
     border-radius: 4px;
@@ -957,6 +963,7 @@ textarea {
         display:block;
         text-align: center;
         z-index: 5;
+        margin-top: 0;
     }
 
     .BSnavbar-menu {
