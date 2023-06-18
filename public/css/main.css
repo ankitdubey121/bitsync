@@ -16,6 +16,7 @@ body {
     justify-content: space-around;
     gap:10vw;
     margin-top: 2vh;
+    z-index: 5;
 }
 
 #ref-logo{

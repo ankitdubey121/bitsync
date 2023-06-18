@@ -1,5 +1,5 @@
-// const socket = io("http://localhost:3000");
-const socket = io("https://bitsync.onrender.com");
+const socket = io("http://localhost:3000");
+// const socket = io("https://bitsync.onrender.com");
 
 const zip = new JSZip();
 sizeArray = []
@@ -29,14 +29,44 @@ socket.on("init", (data) => {
   showAlert('success',"Receiver Joined");
 });
 
-function getTotalFileSize(file){
+// function getTotalFileSize(file){
+//   let totalFileSize = 0
+//   const numFiles = file.length
+//   for(let i=0; i<numFiles; i++){
+//     totalFileSize+= file[i].size;
+//     sizeArray.push(file[i].size)
+//   }
+//   if(totalFileSize > 1024*1024){
+//     return ((totalFileSize)/(1024*1024)).toFixed(2) + " MB"
+//   }else 
+//     return ((totalFileSize/(1024*1024*1024)).toFixed(2)) + " GB"
+// }
+function getTotalFileSize(files) {
+  let totalFileSize = 0;
+  const numFiles = files.length;
+
+  for (let i = 0; i < numFiles; i++) {
+    totalFileSize += files[i].size;
+  }
+
+  if (totalFileSize > 1024 * 1024 * 1024) {
+    return (totalFileSize / (1024 * 1024 * 1024)).toFixed(2) + " GB";
+  } else if (totalFileSize > 1024 * 1024) {
+    return (totalFileSize / (1024 * 1024)).toFixed(2) + " MB";
+  } else {
+    return (totalFileSize / 1024).toFixed(2) + " KB";
+  }
+}
+
+
+function checkFileSize(file){
   let totalFileSize = 0
   const numFiles = file.length
   for(let i=0; i<numFiles; i++){
     totalFileSize+= file[i].size;
     sizeArray.push(file[i].size)
   }
-  return (totalFileSize/(1024*1024*1024)).toFixed(2)
+    return (totalFileSize)/(1024*1024*1024).toFixed(2)
 }
 
 const fileInput = document.getElementById("file-input");
@@ -50,10 +80,11 @@ sendbtn.addEventListener('click', ()=>{
 fileInput.addEventListener('change', (e)=>{
   const file = e.target.files;
   const numFiles = file.length;
-  const totalSize = getTotalFileSize(file)
-  if(numFiles < 11 && totalSize < 2){
+  const totalSize = getTotalFileSize(file) /* mb ya fir gb */
+  const totalFileSizeInGB = checkFileSize(file) /* GB */
+  if(numFiles < 11 && totalFileSizeInGB < 2){
   console.log("File uploaded successfully " + sizeArray);
-  showAlert('success', `${numFiles} file(s) uploaded | ${totalSize*1024}MB`);
+  showAlert('success', `${numFiles} file(s) uploaded | ${totalSize}`);  
   sendbtn.onclick = sendFiles
 }
   else{
@@ -69,7 +100,7 @@ function sendFiles() {
   const sizeArray = [];
   let totalFileSize = 0;
 
-  totalFileSize = getTotalFileSize(file);
+  totalFileSize = checkFileSize(file);
 
   console.log(totalFileSize);
   if(numFiles<11){
@@ -104,7 +135,7 @@ function sendFiles() {
         // Convert elapsed time to seconds
           const elapsedSeconds = elapsedTime / 1000;
           showAlert('success', `${numFiles} file(s) sent in ${elapsedSeconds}s ⚡️`)
-
+          fileInput.value = ''
           } else {
             showAlert('error','Sending Unsuccessful');
           }

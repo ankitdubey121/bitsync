@@ -21,6 +21,14 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
     integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
     crossorigin="anonymous"></script>
+  <!-- Jszip -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"
+    integrity="sha512-XMVd28F1oH/O71fzwBnV7HucLxVwtxf26XV8P4wPk26EDxuGZ91N8bsOttmnomcCD3CS5ZMRL50H0GgOHvegtg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <!-- FileSaver Js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js"
+    integrity="sha512-csNcFYJniKjJxRWRV1R7fvnXrycHP6qDR21mgz1ZP55xY5d+aHLfo9/FcGDQLfn2IfngbAHd8LdfsagcCqgTcQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 
 <style>
@@ -56,20 +64,20 @@
     </div>
 
 
-      <div id='load-section' class="load">
-        <p>Files Awaited</p> &nbsp
-        <img src="/img/loading.svg" alt="SVG Image">
-      </div>
+    <div id='load-section' class="load">
+      <p>Files Awaited</p> &nbsp
+      <img src="/img/loading.svg" alt="SVG Image">
+    </div>
 
-      <div id="alertContainer"></div>
+    <div id="alertContainer"></div>
 
-      <div class="area">
-        <ul class="circles">
-          <%for(let i=0; i < 10; i++){%>
-            <li></li>
-            <%}%>
-        </ul>
-      </div>
+    <div class="area">
+      <ul class="circles">
+        <%for(let i=0; i < 10; i++){%>
+          <li></li>
+          <%}%>
+      </ul>
+    </div>
 
 
 
