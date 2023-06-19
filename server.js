@@ -6,6 +6,7 @@ const fs = require("fs");
 const path = require("path");
 const http = require("http").Server(app);
 const io = require("socket.io")(http);
+let senderSocketID
 const upload = multer({
   dest: "uploads/",
   limits: { fileSize: 3 * 1024 * 1024 * 1024 },
@@ -115,6 +116,7 @@ io.on("connection", (socket) => {
     // created and joined the same room
     socket.join(data.senderID);
     roomCode = data.senderID;
+    senderSocketID = socket.id;
     io.to(socket.id).emit("room-created", roomCode);
   });
 
@@ -127,8 +129,9 @@ io.on("connection", (socket) => {
         io.to(socket.id).emit("not-allowed");
       } else {
         // socket.in(data.senderID).emit("init", socket.id);
-        io.to(socket.id).emit('init')
-        io.to(data.senderID).emit('init');
+        io.to(socket.id).emit('init', {senderid: senderSocketID, receiverid: socket.id})
+        io.to(senderSocketID).emit('init', {senderid: senderSocketID, receiverid: socket.id})
+        // io.to(data.senderID).emit('init');
         socket.join(data.senderID);
         console.log(`${socket.id} joined the room`);
         const socketsInRoom = io.sockets.adapter.rooms.get(data.senderID);

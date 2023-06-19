@@ -2,6 +2,7 @@ const socket = io("http://localhost:3000");
 // const socket = io("https://bitsync.onrender.com");
 
 const zip = new JSZip();
+let sendAllowed = false;
 sizeArray = []
 function generateUUID() {
   var code = "";
@@ -15,18 +16,16 @@ function generateUUID() {
   return code.slice(0, -1); // Remove the trailing dash
 }
 
-const senderID = generateUUID();
-console.log(senderID);
+const senderID = generateUUID()
 receiverID = "";
 socket.emit("create-room", { senderID });
 
 socket.on("init", (data) => {
   // sendFile()
-  console.log("Inside init event and displaying receiver id");
-  receiverID = data;
-  console.log(receiverID);
+  receiverID = data.receiverid;
   // alert('Receiver Joined');
   showAlert('success',"Receiver Joined");
+  sendAllowed = true;
 });
 
 // function getTotalFileSize(file){
@@ -83,9 +82,15 @@ fileInput.addEventListener('change', (e)=>{
   const totalSize = getTotalFileSize(file) /* mb ya fir gb */
   const totalFileSizeInGB = checkFileSize(file) /* GB */
   if(numFiles < 11 && totalFileSizeInGB < 2){
-  console.log("File uploaded successfully " + sizeArray);
   showAlert('success', `${numFiles} file(s) uploaded | ${totalSize}`);  
-  sendbtn.onclick = sendFiles
+  if(sendAllowed){
+    sendbtn.onclick = sendFiles
+
+  }
+  else{
+    sendbtn.disabled = true
+    showAlert('warning', 'Ask receiver to join');
+  }
 }
   else{
       // alert('File Size Exceeded!');
@@ -102,12 +107,9 @@ function sendFiles() {
 
   totalFileSize = checkFileSize(file);
 
-  console.log(totalFileSize);
   if(numFiles<11){
     if(totalFileSize<2){
       const startTime = performance.now();
-      console.log(file);
-      // console.log("Number of files selected:", numFiles);
       sendbtn.innerText = "Sending"
       sendbtn.disabled = true
       const formData = new FormData();
@@ -176,14 +178,14 @@ function copyText() {
       showAlert('success',"Copied: " + copyCode);
     })
     .catch((error) => {
-        // console.error("Unable to copy text to clipboard:", error);
         showAlert('error',"Unable to copy text to clipboard:", error);
     });
 }
 
 // Receiver left
 socket.on('left', (data)=>{
-  if(socket.id != data){
+  if(data == receiverID){
     showAlert('warning', "Receiver left")
+    sendAllowed = false;
   }
 })

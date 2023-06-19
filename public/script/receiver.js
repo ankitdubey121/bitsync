@@ -78,7 +78,7 @@ function downloadZipFile() {
 
 
 
-socket.on('init',()=>{
+socket.on('init',(data)=>{
   showAlert('success', "Joined room")
   const receiverMain = document.getElementById('receiver-main');
   const displayCodeDiv = document.createElement('input');
@@ -90,7 +90,7 @@ socket.on('init',()=>{
   joinBtn.style.display = 'none';
   codeDiv.style.display = 'none';
   receiverMain.insertBefore(displayCodeDiv, joinBtn);
-
+  senderSocketID = data.senderid;
   const load = document.getElementById('load-section');
   load.style.display = 'flex';
 });
@@ -182,7 +182,7 @@ socket.on("file-transfer", (fileData) => {
 // Room left
 
 socket.on('left', (data)=>{
-  if(socket.id != data){
+  if(senderSocketID == data){
     showAlert('warning', "Sender left")
   }
 })
