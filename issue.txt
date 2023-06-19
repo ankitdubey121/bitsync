@@ -1,2 +1,0 @@
-createObjectURL' on 'URL': Overload resolution failed. - res
-MIME and content type - res

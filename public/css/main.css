@@ -507,6 +507,9 @@ textarea {
     display:none;
 }
 
+.drag-over{
+    opacity: 0.5;
+}
 
 /* SENDER HTML FILE CSS CODE end  ///////////////////////////////////////////////////////////*/
 

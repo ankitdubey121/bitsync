@@ -1,5 +1,5 @@
-const socket = io("http://localhost:3000");
-// const socket = io("https://bitsync.onrender.com");
+// const socket = io("http://localhost:3000");
+const socket = io("https://bitsync.onrender.com");
 
 const zip = new JSZip();
 let sendAllowed = false;
@@ -24,22 +24,10 @@ socket.on("init", (data) => {
   // sendFile()
   receiverID = data.receiverid;
   // alert('Receiver Joined');
-  showAlert('success',"Receiver Joined");
+  showAlert('success', "Receiver Joined");
   sendAllowed = true;
 });
 
-// function getTotalFileSize(file){
-//   let totalFileSize = 0
-//   const numFiles = file.length
-//   for(let i=0; i<numFiles; i++){
-//     totalFileSize+= file[i].size;
-//     sizeArray.push(file[i].size)
-//   }
-//   if(totalFileSize > 1024*1024){
-//     return ((totalFileSize)/(1024*1024)).toFixed(2) + " MB"
-//   }else 
-//     return ((totalFileSize/(1024*1024*1024)).toFixed(2)) + " GB"
-// }
 function getTotalFileSize(files) {
   let totalFileSize = 0;
   const numFiles = files.length;
@@ -58,57 +46,100 @@ function getTotalFileSize(files) {
 }
 
 
-function checkFileSize(file){
+function checkFileSize(file) {
   let totalFileSize = 0
   const numFiles = file.length
-  for(let i=0; i<numFiles; i++){
-    totalFileSize+= file[i].size;
+  for (let i = 0; i < numFiles; i++) {
+    totalFileSize += file[i].size;
     sizeArray.push(file[i].size)
   }
-    return (totalFileSize)/(1024*1024*1024).toFixed(2)
+  return (totalFileSize) / (1024 * 1024 * 1024).toFixed(2)
 }
 
 const fileInput = document.getElementById("file-input");
 const sendbtn = document.getElementById("send-btn");
-sendbtn.addEventListener('click', ()=>{
-  if(fileInput.files.length == 0){
+sendbtn.addEventListener('click', () => {
+  if (fileInput.files.length == 0) {
     showAlert('error', "Select files")
   }
 })
 
-fileInput.addEventListener('change', (e)=>{
+fileInput.addEventListener('change', (e) => {
   const file = e.target.files;
   const numFiles = file.length;
   const totalSize = getTotalFileSize(file) /* mb ya fir gb */
   const totalFileSizeInGB = checkFileSize(file) /* GB */
-  if(numFiles < 11 && totalFileSizeInGB < 2){
-  showAlert('success', `${numFiles} file(s) uploaded | ${totalSize}`);  
-  if(sendAllowed){
-    sendbtn.onclick = sendFiles
+  if (numFiles < 11 && totalFileSizeInGB < 2) {
+    showAlert('success', `${numFiles} file(s) uploaded | ${totalSize}`);
+    if (sendAllowed) {
+      sendbtn.onclick = () => {
+        sendFiles(file);
+      }
 
+    }
+    else {
+      showAlert('warning', 'Ask receiver to join');
+    }
   }
-  else{
-    sendbtn.disabled = true
-    showAlert('warning', 'Ask receiver to join');
+  else {
+    showAlert('warning', 'Limit Exceeded!');
+  }
+});
+
+
+const fileDropArea = document.getElementById("drop-area");
+const dropFeedback = document.getElementById("dropFeedback");
+// Event listeners for drag and drop events
+fileDropArea.addEventListener("dragenter", handleDragEnter);
+fileDropArea.addEventListener("dragover", handleDragOver);
+fileDropArea.addEventListener("dragleave", handleDragLeave);
+fileDropArea.addEventListener("drop", handleDrop);
+
+function handleDragEnter(e) { e.preventDefault(); }
+function handleDragOver(e) { e.preventDefault(); dropFeedback.classList.add("drag-over"); }
+function handleDragLeave(e) { e.preventDefault(); dropFeedback.classList.remove("drag-over"); }
+
+function handleDrop(e) {
+  e.preventDefault();
+  dropFeedback.classList.remove("drag-over");
+  handleFiles(e.dataTransfer.files);
+}
+
+function handleFileInputChange(e) {
+  handleFiles(e.target.files);
+}
+
+function handleFiles(files) {
+  // Handle the files here as you did before
+  const numFiles = files.length;
+  const totalSize = getTotalFileSize(files);
+  const totalFileSizeInGB = checkFileSize(files);
+
+  if (numFiles < 11 && totalFileSizeInGB < 2) {
+    showAlert("success", `${numFiles} file(s) uploaded | ${totalSize}`);
+    if (sendAllowed) {
+      sendbtn.onclick = () => {
+        sendFiles(files)
+      }
+    } else {
+      showAlert("warning", "Ask receiver to join");
+    }
+  } else {
+    showAlert("warning", "Limit Exceeded!");
   }
 }
-  else{
-      // alert('File Size Exceeded!');
-      showAlert('warning','Limit Exceeded!');
-    }
-})
 
 
-function sendFiles() {
-  const file = fileInput.files;
+function sendFiles(file) {
+  // const file = fileInput.files;
   const numFiles = file.length;
   const sizeArray = [];
   let totalFileSize = 0;
 
   totalFileSize = checkFileSize(file);
 
-  if(numFiles<11){
-    if(totalFileSize<2){
+  if (numFiles < 11) {
+    if (totalFileSize < 2) {
       const startTime = performance.now();
       sendbtn.innerText = "Sending"
       sendbtn.disabled = true
@@ -116,7 +147,7 @@ function sendFiles() {
       for (let i = 0; i < numFiles; i++) {
         const fileName = file[i].name;
         // const file = file[i];
-        const fileSizeInMB = file[i].size/(1024 * 1024);
+        const fileSizeInMB = file[i].size / (1024 * 1024);
         sizeArray.push(fileSizeInMB);
         formData.append("files[]", file[i], fileName, fileSizeInMB);
       }
@@ -131,29 +162,29 @@ function sendFiles() {
             sendbtn.disabled = false;
             const endTime = performance.now();
 
-        // Calculate elapsed time in milliseconds
-        const elapsedTime = endTime - startTime;
-      
-        // Convert elapsed time to seconds
-          const elapsedSeconds = elapsedTime / 1000;
-          showAlert('success', `${numFiles} file(s) sent in ${elapsedSeconds}s ⚡️`)
-          fileInput.value = ''
+            // Calculate elapsed time in milliseconds
+            const elapsedTime = endTime - startTime;
+
+            // Convert elapsed time to seconds
+            const elapsedSeconds = elapsedTime / 1000;
+            showAlert('success', `${numFiles} file(s) sent in ${elapsedSeconds}s ⚡️`)
+            fileInput.value = ''
           } else {
-            showAlert('error','Sending Unsuccessful');
+            showAlert('error', 'Sending Unsuccessful');
           }
         })
         .catch((error) => {
-          showAlert('error','Error: '+error);
+          showAlert('error', 'Error: ' + error);
         });
-       }
-  else{
-    // alert('File Size Exceeded!');
-    showAlert('warning','File Size Exceeded!');
+    }
+    else {
+      // alert('File Size Exceeded!');
+      showAlert('warning', 'File Size Exceeded!');
+    }
   }
-  }
-  else{
+  else {
     // alert('Maximum number of Files exceeded!');
-    showAlert('warning','Maximum number of Files exceeded!');
+    showAlert('warning', 'Maximum number of Files exceeded!');
   }
 }
 
@@ -175,16 +206,16 @@ function copyText() {
     .writeText(copyCode)
     .then(() => {
       // alert("Copied: " + copyCode);
-      showAlert('success',"Copied: " + copyCode);
+      showAlert('success', "Copied: " + copyCode);
     })
     .catch((error) => {
-        showAlert('error',"Unable to copy text to clipboard:", error);
+      showAlert('error', "Unable to copy text to clipboard:", error);
     });
 }
 
 // Receiver left
-socket.on('left', (data)=>{
-  if(data == receiverID){
+socket.on('left', (data) => {
+  if (data == receiverID) {
     showAlert('warning', "Receiver left")
     sendAllowed = false;
   }

@@ -18,7 +18,7 @@
     
 </head>
 
-<body>
+<body id="drop-area">
   <%- include('head') %>
   <div id="alertContainer"></div>
     <div class="sender-main">
@@ -34,11 +34,11 @@
       </div>
 
 
-
+      
       <div class="sender-file-input">
         <input id="file-input" class="file-input" multiple type="file">
 
-        <label for="file-input" class="file-input-label">
+        <label for="file-input" id='dropFeedback' class="file-input-label">
           <!-- <img src="/img/file.svg" alt="File Icon" /> -->
           <i class="fas fa-file" style="font-size: 60px; float: left;"></i>
           <span id="pc-span"><b>Choose a File</b> or Drag it !!</span>
