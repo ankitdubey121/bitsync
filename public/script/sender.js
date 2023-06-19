@@ -1,5 +1,5 @@
 // const socket = io("http://localhost:3000");
-const socket = io("https://bitsync.onrender.com");
+const socket = io("https://bitsync.onrender.com")
 
 const zip = new JSZip();
 let sendAllowed = false;
@@ -59,7 +59,7 @@ function checkFileSize(file) {
 const fileInput = document.getElementById("file-input");
 const sendbtn = document.getElementById("send-btn");
 sendbtn.addEventListener('click', () => {
-  if (fileInput.files.length == 0) {
+  if (!sendAllowed && fileInput.files.length == 0) {
     showAlert('error', "Select files")
   }
 })
