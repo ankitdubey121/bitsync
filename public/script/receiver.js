@@ -1,5 +1,5 @@
-const socket = io("http://localhost:3000");
-// const socket = io("https://bitsync.onrender.com");
+// const socket = io("http://localhost:3000");
+const socket = io("https://bitsync.onrender.com");
 
 receiverID = "";
 
@@ -115,7 +115,7 @@ socket.on("file-transfer", (fileData) => {
   if(mimeType == "text/plain"){
     extension = 'txt'
   }else{
-    const extension = mimeType.split("/")[1];
+    extension = mimeType.split("/")[1];
   }
   const fileCount = fileData.fileCount;
   const downloadLink = document.createElement("a");
