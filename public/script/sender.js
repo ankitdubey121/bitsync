@@ -167,7 +167,7 @@ function sendFiles(file) {
 
             // Convert elapsed time to seconds
             const elapsedSeconds = elapsedTime / 1000;
-            showAlert('success', `${numFiles} file(s) sent in ${elapsedSeconds}s ⚡️`)
+            showAlert('success', `${numFiles} file(s) sent in ${elapsedSeconds.toFixed(2)}s ⚡️`)
             fileInput.value = ''
           } else {
             showAlert('error', 'Sending Unsuccessful');
