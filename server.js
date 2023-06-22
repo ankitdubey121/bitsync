@@ -116,24 +116,24 @@ io.on("connection", (socket) => {
 
   socket.on("join-room", (data) => {
     // Joined the room created by the senderID
-    if (data.senderID == roomCode) {
-      const numSocketsInRoom = io.sockets.adapter.rooms.get(data.senderID).size;
+    if (data.roomcode == roomCode) {
+      const numSocketsInRoom = io.sockets.adapter.rooms.get(data.roomcode).size;
       if (numSocketsInRoom >= 2) {
         // Reject the third socket from joining the room
         io.to(socket.id).emit("not-allowed");
       } else {
         io.to(socket.id).emit('init', {senderid: senderSocketID, receiverid: socket.id})
         io.to(senderSocketID).emit('init', {senderid: senderSocketID, receiverid: socket.id})
-        socket.join(data.senderID);
+        socket.join(data.roomcode);
         console.log(`${socket.id} joined the room`);
-        const socketsInRoom = io.sockets.adapter.rooms.get(data.senderID);
+        const socketsInRoom = io.sockets.adapter.rooms.get(data.roomcode);
 
         // Get the socket IDs of all sockets in the room
         const socketIDs = [];
         socketsInRoom.forEach((socket, socketID) => {
           socketIDs.push(socketID);
         });
-        console.log(`Socket IDs in room ${data.senderID}:`, socketIDs);
+        console.log(`Socket IDs in room ${data.roomcode}:`, socketIDs);
       }
     } else {
       console.log("Room code not matched");
