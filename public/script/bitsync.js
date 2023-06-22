@@ -61,4 +61,33 @@ const showAlert = (color, message)=>{
 
 
 
+// Function to toggle dark mode
+function toggleDarkMode() {
+  var body = document.querySelector('body');
+  body.classList.toggle('dark-mode');
+
+  // Store the state of dark mode in localStorage
+  var isDarkMode = body.classList.contains('dark-mode');
+  localStorage.setItem('darkMode', isDarkMode);
+}
+
+// Check the stored state of dark mode and apply it on page load
+document.addEventListener('DOMContentLoaded', function() {
+  var isDarkMode = localStorage.getItem('darkMode');
+  var body = document.querySelector('body');
+  const toggleSwitch = document.querySelector('#toggleSwitch');
+
+  if (isDarkMode === 'true') {
+    toggleSwitch.checked = true;
+    body.classList.add('dark-mode');
+  }
+});
+
+
+
+
+
+
+
+
 
