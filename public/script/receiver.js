@@ -1,32 +1,44 @@
-// const socket = io("http://localhost:3000");
-const socket = io("https://bitsync.onrender.com");
+const socket = io("http://localhost:3000");
+// const socket = io("https://bitsync.onrender.com");
 
 receiverID = "";
 
 const joinBtn = document.getElementById("joinBtn");
 const codeDiv = document.getElementById('roomCode');
 
-codeDiv.addEventListener('keyup', (e) => {
-  let userInput = e.target.value
-  if (userInput.length == 2 || userInput.length == 5) {
-    userInput += "-"
-  }
-  if (userInput.length > 8) {
-    newValue = userInput.slice(0, 8)
-    codeDiv.value = newValue
-  }
-  else {
-    codeDiv.value = userInput
-  }
-})
+codeDiv.addEventListener('keyup', handleInput);
+
+function handleInput(e) {
+  const maxInputLength = 8; // Maximum input length including -s
+  let userInput = e.target.value;
+    if (userInput.length > maxInputLength) {
+      userInput = userInput.slice(0, maxInputLength); // Limit the input length
+    }
+  codeDiv.value = userInput;
+}
 
 joinBtn.addEventListener("click", () => {
-  let senderID = document.getElementById("roomCode").value;
+  let val = "";
+  const roomCodeInput = document.getElementById("roomCode");
+  const roomcode = roomCodeInput.value;
+  let formattedRoomCode = ''
+  if (roomcode[2] == '-' && roomcode[5] == '-') {
+    formattedRoomCode = roomcode;
+  } else {
+    const top = roomcode.slice(0, 2);
+    const middle = roomcode.slice(2, 4);
+    const bottom = roomcode.slice(4);
+    val = top + "-" + middle + "-" + bottom;
+    formattedRoomCode = val;
+  }
+  codeDiv.value = formattedRoomCode;
   socket.on("connect", () => {
     receiverID = socket.id;
   });
-  socket.emit("join-room", { senderID, receiverID });
+
+  socket.emit("join-room", { roomcode: formattedRoomCode, receiverID });
 });
+
 
 // Function to download all files in zip
 
@@ -80,6 +92,8 @@ function downloadZipFile() {
 
 socket.on('init', (data) => {
   showAlert('success', "Joined room")
+  const dashedInfo = document.getElementById('dashedInfo')
+  dashedInfo.style.display = 'none';
   const receiverMain = document.getElementById('receiver-main');
   const displayCodeDiv = document.createElement('input');
   displayCodeDiv.disabled = true;
