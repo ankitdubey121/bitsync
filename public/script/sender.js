@@ -164,10 +164,14 @@ function sendFiles(file) {
 
             // Calculate elapsed time in milliseconds
             const elapsedTime = endTime - startTime;
-
+            const tempFile = formData.get("files[]", 2);
+            const tempSize = tempFile.size / (1024*1024)
             // Convert elapsed time to seconds
             const elapsedSeconds = elapsedTime / 1000;
+            // Speed to send the file in Mbps
+            const tempSpeed = (tempSize/elapsedSeconds).toFixed(2)
             showAlert('success', `${numFiles} file(s) sent in ${elapsedSeconds.toFixed(2)}s ⚡️`)
+            console.log(`${numFiles} file(s) sent in ${elapsedSeconds.toFixed(2)}s ⚡️ | Avg speed : ${tempSpeed}mb/s`)
             fileInput.value = ''
           } else {
             showAlert('error', 'Sending Unsuccessful');
