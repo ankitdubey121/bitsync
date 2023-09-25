@@ -5,25 +5,25 @@ A peer to peer file sharing web app designed to make file sharing seemless and s
 
 ## Preview
 
-![App Screenshot](httpsbitsync.onrender.comimgDEVICE_PICS.png)
+![App Screenshot](https://bitsync.onrender.com/img/DEVICE_PICS.png)
 
 
 ## Authors
 
-- [@ankitdubey121](httpswww.github.comankitdubey121)
-- [@DIVYA-TW](httpswww.github.comDIVYA-TW)
-- [@kshavp](httpswww.github.comkshavp)
+- [@ankitdubey121](https://www.github.com/ankitdubey121)
+- [@DIVYA-TW](https://www.github.com/DIVYA-TW)
+- [@kshavp](https://www.github.com/kshavp)
 
 
 ## Live
 
-httpsbitsync.onrender.com
+https://bitsync.onrender.com/
 
 
 ## Features
 - Login Free
 - Room based
-- Lightdark mode toggle
+- Light/dark mode toggle
 - Live previews
 - Fullscreen mode
 - Cross platform
@@ -34,7 +34,7 @@ httpsbitsync.onrender.com
 Clone the project
 
 ```bash
-  git clone httpsgithub.comankitdubey121bitsync.git
+  git clone https://github.com/ankitdubey121/bitsync.git
 ```
 
 Go to the project directory
