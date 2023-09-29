@@ -5,7 +5,7 @@ A peer to peer file sharing web app designed to make file sharing seemless and s
 
 ## Preview
 
-![App Screenshot](https://bitsync.onrender.com/img/DEVICE_PICS.png)
+![App Screenshot]([https://bitsync.onrender.com/img/DEVICE_PICS.png](https://github.com/ankitdubey121/bitsync/blob/main/public/img/DEVICE_PICS.png))
 
 
 ## Authors
