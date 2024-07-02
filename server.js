@@ -6,6 +6,7 @@ const fs = require("fs");
 const path = require("path");
 const http = require("http").Server(app);
 const io = require("socket.io")(http);
+const port = process.env.PORT | 3000;
 let senderSocketID
 const upload = multer({
   dest: "uploads/",
@@ -152,6 +153,6 @@ io.on("connection", (socket) => {
   });
 });
 
-http.listen(3000, () => {
-  console.log("Server is running on port 3000");
+http.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
 });

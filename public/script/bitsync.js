@@ -59,6 +59,10 @@ const showAlert = (color, message)=>{
   }, 2500);
 }
 
+document.getElementById('mySlider').addEventListener('click', function() {
+  this.classList.toggle('active');
+});
+
 
 
 // Function to toggle dark mode

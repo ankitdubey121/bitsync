@@ -65,24 +65,28 @@ sendbtn.addEventListener('click', () => {
 })
 
 fileInput.addEventListener('change', (e) => {
-  const file = e.target.files;
-  const numFiles = file.length;
-  const totalSize = getTotalFileSize(file) /* mb ya fir gb */
-  const totalFileSizeInGB = checkFileSize(file) /* GB */
-  if (numFiles < 11 && totalFileSizeInGB < 2) {
-    showAlert('success', `${numFiles} file(s) uploaded | ${totalSize}`);
-    if (sendAllowed) {
-      sendbtn.onclick = () => {
-        sendFiles(file);
-      }
+  if (sendAllowed) {
+    const file = e.target.files;
+    const numFiles = file.length;
+    const totalSize = getTotalFileSize(file) /* mb ya fir gb */
+    const totalFileSizeInGB = checkFileSize(file) /* GB */
+    if (numFiles < 11 && totalFileSizeInGB < 2) {
+      showAlert('success', `${numFiles} file(s) uploaded | ${totalSize}`);
+      // if (sendAllowed) {
+      //   sendbtn.onclick = () => {
+      //     sendFiles(file);
+      //   }
 
+      // }
+      // else {
+      //   showAlert('warning', 'Ask receiver to join');
+      // }
     }
     else {
-      showAlert('warning', 'Ask receiver to join');
+      showAlert('warning', 'Limit Exceeded!');
     }
-  }
-  else {
-    showAlert('warning', 'Limit Exceeded!');
+  } else {
+    showAlert("warning", "Ask receiver to join")
   }
 });
 
@@ -165,11 +169,11 @@ function sendFiles(file) {
             // Calculate elapsed time in milliseconds
             const elapsedTime = endTime - startTime;
             const tempFile = formData.get("files[]", 2);
-            const tempSize = tempFile.size / (1024*1024)
+            const tempSize = tempFile.size / (1024 * 1024)
             // Convert elapsed time to seconds
             const elapsedSeconds = elapsedTime / 1000;
             // Speed to send the file in Mbps
-            const tempSpeed = (tempSize/elapsedSeconds).toFixed(2)
+            const tempSpeed = (tempSize / elapsedSeconds).toFixed(2)
             showAlert('success', `${numFiles} file(s) sent in ${elapsedSeconds.toFixed(2)}s ⚡️`)
             console.log(`${numFiles} file(s) sent in ${elapsedSeconds.toFixed(2)}s ⚡️ | Avg speed : ${tempSpeed}mb/s`)
             fileInput.value = ''
