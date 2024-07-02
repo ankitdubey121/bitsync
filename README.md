@@ -11,7 +11,6 @@ A peer to peer file sharing web app designed to make file sharing seemless and s
 ## Authors
 
 - [@ankitdubey121](https://www.github.com/ankitdubey121)
-- [@DIVYA-TW](https://www.github.com/DIVYA-TW)
 - [@kshavp](https://www.github.com/kshavp)
 
 
