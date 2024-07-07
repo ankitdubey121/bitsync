@@ -1,54 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sender</title>
-  <link rel="icon" type="image/x-icon" href="/img/fav.ico">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <script
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sender</title>
+    <link rel="icon" type="image/x-icon" href="/img/fav.ico" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script
       src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.6.1/socket.io.js"
       integrity="sha512-xbQU0+iHqhVt7VIXi6vBJKPh3IQBF5B84sSHdjKiSccyX/1ZI7Vnkt2/8y8uruj63/DVmCxfUNohPNruthTEQA=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
     <script src="https://cdn.jsdelivr.net/npm/jszip@3.7.1/dist/jszip.min.js"></script>
-    
-</head>
+  </head>
 
-<body id="drop-area">
-  <%- include('head') %>
-  <div id="alertContainer"></div>
+  <body id="drop-area">
+    <%- include('head') %>
+    <div id="alertContainer"></div>
     <div class="sender-main">
       <div class="sender-heading">You are a Sender</div>
-      <div class="sender-subheading">Share your files effortlessly and securely with BitSync.</div>
+      <div class="sender-subheading">
+        Share your files effortlessly and securely with BitSync.
+      </div>
       <div class="sender-input-container">
-        <div id='room-info' class="room-info">
-          <div id='roomcode-head' class="roomcode-head">Room Code</div>
+        <div id="room-info" class="room-info">
+          <div id="roomcode-head" class="roomcode-head">Room Code</div>
           <!-- <div id='copy-code' class="code">ghyt-yui-op</div> -->
           <!-- <textarea class="code" id='copy-code' rows="1" disabled>ghyt-yui-op</textarea> -->
         </div>
-        <img src="/img/copy.png" id='copyimg' alt="copy" onclick="copyText()">
+        <img src="/img/copy.png" id="copyimg" alt="copy" onclick="copyText()" />
       </div>
 
-
-      
       <div class="sender-file-input">
-        <input id="file-input" class="file-input" multiple type="file">
+        <input id="file-input" class="file-input" multiple type="file" />
 
-        <label for="file-input" id='dropFeedback' class="file-input-label">
+        <label for="file-input" id="dropFeedback" class="file-input-label">
           <!-- <img src="/img/file.svg" alt="File Icon" /> -->
-          <i class="fas fa-file" style="font-size: 60px; float: left;"></i>
+          <i class="fas fa-file" style="font-size: 60px; float: left"></i>
           <span id="pc-span"><b>Choose a File</b> or Drag it !!</span>
           <span id="mobile-span"><b>Choose a File</b></span>
         </label>
       </div>
 
-      
       <button id="send-btn">Send ▶</button>
-      <p id='max-info'>Max Files : 10 | Max Size : 2 GB</p>
+      <p id="max-info">Max Files : 10 | Max Size : 2 GB</p>
     </div>
 
     <div class="area">
@@ -59,8 +66,34 @@
       </ul>
     </div>
 
+    <!-- chat box begins here -->
+    <div class="chatBoxParent minimized">
+      <div class="chat-container">
+        <div class="chat-messages mb-3">
+          <!-- Messages will be displayed here -->
+          <div class="message"></div>
+          <div class="message text-right"></div>
+          <div id="typing-status"></div>
+        </div>
+        <form id="message-form" action="/sendMsgtoReceiver">
+          <div class="input-group">
+            <input
+              type="text"
+              class="form-control"
+              id="message-input"
+              height="100%"
+              placeholder="Type your message..."
+            />
+            <!-- <div class="input-group-append"> -->
+            <button class="btn btn-primary" type="submit" id="sendMsg">
+              Send
+            </button>
+            <!-- </div> -->
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
 
-</body>
-
-<script src="/script/sender.js"></script>
+  <script src="/script/sender.js"></script>
 </html>
