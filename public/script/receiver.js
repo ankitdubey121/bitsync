@@ -1,5 +1,5 @@
-const socket = io("http://localhost:3000");
-// const socket = io("https://bitsync.onrender.com");
+// const socket = io("http://localhost:3000");
+const socket = io("https://bitsync.onrender.com");
 
 receiverID = "";
 sendAllowed = false;
