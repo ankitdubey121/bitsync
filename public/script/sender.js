@@ -87,15 +87,9 @@ fileInput.addEventListener("change", (e) => {
     const totalFileSizeInGB = checkFileSize(file); /* GB */
     if (numFiles < 11 && totalFileSizeInGB < 2) {
       showAlert("success", `${numFiles} file(s) uploaded | ${totalSize}`);
-      // if (sendAllowed) {
-      //   sendbtn.onclick = () => {
-      //     sendFiles(file);
-      //   }
-
-      // }
-      // else {
-      //   showAlert('warning', 'Ask receiver to join');
-      // }
+      sendbtn.onclick = () => {
+            sendFiles(file);
+          }
     } else {
       showAlert("warning", "Limit Exceeded!");
     }

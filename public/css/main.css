@@ -1570,7 +1570,7 @@ input:focus {
     outline: none;
 }
 
-.btn-primary {
+.chat-send-btn {
     /* padding: 15px; */
     border: none;
     background-color: #007bff;
@@ -1580,11 +1580,11 @@ input:focus {
     box-sizing: border-box;
 }
 
-.btn-primary:focus {
+.chat-send-btn:focus {
     outline: none;
     border: none;
 }
 
-.btn-primary:hover {
+.chat-send-btn:hover {
     background-color: #0056b3;
 }
