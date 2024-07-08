@@ -1,6 +1,6 @@
 const socket = io("http://localhost:3000");
 // const socket = io("https://bitsync.onrender.com");
-
+let notificationCount = 0
 const zip = new JSZip();
 let sendAllowed = false;
 sizeArray = [];
@@ -38,7 +38,10 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
     chatBoxParent.classList.toggle("minimized");
+    const notificationCountElement = document.getElementById('notificationCount')
+    notificationCountElement.style.display = "none"
   });
+  
 });
 
 function getTotalFileSize(files) {
@@ -280,6 +283,15 @@ socket.on("msgFromReceiver", (data) => {
     .getElementsByClassName("chat-messages")[0]
     .appendChild(newMessageDiv); // Access the first element
   console.log(document.getElementsByClassName("chat-messages"));
+  isMinimized = document.getElementById('chatButton').classList.contains('minimized')
+  if(isMinimized){
+    notificationCount++;
+    console.log(notificationCount)
+    const notificationCountElement = document.getElementById('notificationCount')
+    notificationCountElement.innerText = notificationCount;
+    notificationCountElement.style.display = "inline-block"
+    notificationCountElement.style.backgroundColor = 'green'
+  }
 });
 
 document.getElementById("message-input").addEventListener("input", function () {

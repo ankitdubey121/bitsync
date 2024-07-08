@@ -3,6 +3,7 @@ const socket = io("http://localhost:3000");
 
 receiverID = "";
 sendAllowed = false;
+let notificationCount = 0
 
 const joinBtn = document.getElementById("joinBtn");
 const codeDiv = document.getElementById("roomCode");
@@ -17,6 +18,8 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
     chatBoxParent.classList.toggle("minimized");
+    const notificationCountElement = document.getElementById('notificationCount')
+    notificationCountElement.style.display = "none"
   });
 });
 
@@ -230,6 +233,15 @@ socket.on("msgFromSender", (data) => {
     .appendChild(newMessageDiv); // Access the first element
   console.log(document.getElementsByClassName("chat-messages"));
   document.getElementsByClassName("typing-status").innerText = "";
+  isMinimized = document.getElementById('chatButton').classList.contains('minimized')
+  if(isMinimized){
+    notificationCount++;
+    console.log(notificationCount)
+    const notificationCountElement = document.getElementById('notificationCount')
+    notificationCountElement.innerText = notificationCount;
+    notificationCountElement.style.display = "inline-block"
+    notificationCountElement.style.backgroundColor = 'green'
+  }
 });
 
 socket.on("senderTyping", (data) => {
