@@ -86,12 +86,3 @@ document.addEventListener('DOMContentLoaded', function() {
     body.classList.add('dark-mode');
   }
 });
-
-
-
-
-
-
-
-
-

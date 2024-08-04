@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
     chatBoxParent.classList.toggle("minimized");
     const notificationCountElement = document.getElementById('notificationCount')
     notificationCountElement.style.display = "none"
+    notificationCount = 0
   });
 });
 
@@ -224,7 +225,6 @@ sendMsgBtn.addEventListener("click", (e) => {
 });
 
 socket.on("msgFromSender", (data) => {
-  console.log(data.message);
   let newMessageDiv = document.createElement("div");
   newMessageDiv.classList.add("message", "pl-2", "text-left", "bg-light");
   newMessageDiv.innerText = `${data.message}`;
@@ -233,6 +233,9 @@ socket.on("msgFromSender", (data) => {
     .appendChild(newMessageDiv); // Access the first element
   console.log(document.getElementsByClassName("chat-messages"));
   document.getElementsByClassName("typing-status").innerText = "";
+  const notificationSound = document.getElementById("notificationSound");
+  notificationSound.play().catch(error => {
+    console.error("Error playing sound: ", error)});
   isMinimized = document.getElementById('chatButton').classList.contains('minimized')
   if(isMinimized){
     notificationCount++;

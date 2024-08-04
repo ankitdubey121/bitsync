@@ -8,6 +8,9 @@ const http = require("http").Server(app);
 const io = require("socket.io")(http);
 const bodyParser = require("body-parser");
 const port = process.env.PORT | 3000;
+
+app.use(express.static(path.join(__dirname, 'public')));
+
 let senderSocketID;
 const upload = multer({
   dest: "uploads/",
@@ -121,10 +124,9 @@ io.on("connection", (socket) => {
   });
 
   socket.on("msgFromSender", (data) => {
-    console.log("Message received from sender:", data.message);
-
+    // console.log("Message received from sender:", data.message);
     // Broadcast the message to receiver
-    io.emit("msgFromSender", data);
+    socket.broadcast.emit("msgFromSender", data);
   });
 
   socket.on("msgFromReceiver", (data) => {
@@ -135,12 +137,12 @@ io.on("connection", (socket) => {
   });
 
   socket.on("senderTyping", (data) => {
-    console.log(data);
+    // console.log(data);
     io.emit("senderTyping", data);
   });
 
   socket.on("receiverTyping", (data) => {
-    console.log(data);
+    // console.log(data);
     io.emit("receiverTyping", data);
   });
 
@@ -177,10 +179,6 @@ io.on("connection", (socket) => {
     }
   });
 
-  socket.on("file-upload", (data) => {
-    console.log(data);
-    socket.in(roomCode).emit("file-receive", data.file);
-  });
 
   socket.on("disconnect", () => {
     io.to(roomCode).emit("left", socket.id);

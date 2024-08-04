@@ -1,6 +1,7 @@
 // const socket = io("http://localhost:3000");
 const socket = io("https://bitsync.onrender.com");
-let notificationCount = 0
+let notificationCount = 0;
+
 const zip = new JSZip();
 let sendAllowed = false;
 sizeArray = [];
@@ -40,6 +41,7 @@ document.addEventListener("DOMContentLoaded", function () {
     chatBoxParent.classList.toggle("minimized");
     const notificationCountElement = document.getElementById('notificationCount')
     notificationCountElement.style.display = "none"
+    notificationCount = 0;
   });
   
 });
@@ -260,7 +262,7 @@ sendMsgBtn.addEventListener("click", (e) => {
     document
       .getElementsByClassName("chat-messages")[0]
       .appendChild(newMessageDiv); // Access the first element
-    console.log(document.getElementsByClassName("chat-messages"));
+    // console.log(document.getElementsByClassName("chat-messages"));
     socket.emit("msgFromSender", { message });
     document.getElementById("message-input").value = "";
   } else {
@@ -269,18 +271,19 @@ sendMsgBtn.addEventListener("click", (e) => {
 });
 
 socket.on("msgFromReceiver", (data) => {
-  console.log(data.message);
   let newMessageDiv = document.createElement("div");
   newMessageDiv.classList.add("message", "pl-2", "text-left", "bg-light");
   newMessageDiv.innerText = `${data.message}`;
   document
     .getElementsByClassName("chat-messages")[0]
     .appendChild(newMessageDiv); // Access the first element
-  console.log(document.getElementsByClassName("chat-messages"));
+  // console.log(document.getElementsByClassName("chat-messages"));
+  const notificationSound = document.getElementById("notificationSound");
+  notificationSound.play().catch(error => {
+    console.error("Error playing sound: ", error)});
   isMinimized = document.getElementById('chatButton').classList.contains('minimized')
   if(isMinimized){
     notificationCount++;
-    console.log(notificationCount)
     const notificationCountElement = document.getElementById('notificationCount')
     notificationCountElement.innerText = notificationCount;
     notificationCountElement.style.display = "inline-block"
@@ -291,7 +294,7 @@ socket.on("msgFromReceiver", (data) => {
 document.getElementById("message-input").addEventListener("input", function () {
   if (sendAllowed) {
     let typingTimeout;
-    console.log("sender is typing");
+    // console.log("sender is typing");
     socket.emit("senderTyping", { typing: true });
     clearTimeout(typingTimeout);
     typingTimeout = setTimeout(() => {
